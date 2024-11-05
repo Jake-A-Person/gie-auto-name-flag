@@ -45,25 +45,25 @@ def readFlags(file,tagToFind):
             #found
             if tag.strip() == tagToFind:
                 returnVal = ""
+                intial0 = True
                 for y in range (i,len(flagFileText)):
-                    intial0 = True
-                    if flagFileText[i] == "\n":
+                    if flagFileText[y] == "\n":
                         isComment = False
-                    elif flagFileText[i] == '#':
+                    elif flagFileText[y] == '#':
                         isComment = True
-                    elif flagFileText[i] == '{':
+                    elif flagFileText[y] == '{':
                         bracketDepth += 1
-                        returnVal = returnVal + flagFile[i]
+                        returnVal = returnVal + flagFileText[y]
                         intial0 = False
-                    elif flagFileText[i] == '}':
+                    elif flagFileText[y] == '}':
                         bracketDepth -= 1 
-                        returnVal = returnVal + flagFile[i]
+                        returnVal = returnVal + flagFileText[y]
                     if bracketDepth == 0 and intial0 == False:
                         return returnVal
                     else:
-                        returnVal = returnVal + flagFileText[i]
+                        returnVal = returnVal + flagFileText[y]
             else:
                 tag = ""
                 isTag = False
 
-print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","ABS"))
+print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","GBR"))
