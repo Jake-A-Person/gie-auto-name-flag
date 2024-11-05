@@ -12,7 +12,8 @@ def readFlags(file,tagToFind):
             #is start of new line (hence is not a comment for next char)
             if flagFileText[i] == '\n':
                 isComment = False
-        elif flagFileText[i] == '#':
+        # # is the comments and @ defines vars so we treat them the same here as they dont impact the parsing of data
+        elif flagFileText[i] == '#' or flagFileText[i] == '@':
             isComment = True
         elif flagFileText[i] == '{':
             bracketDepth += 1
