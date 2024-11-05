@@ -2,23 +2,41 @@ def readFlags(file,tagToFind):
     flagFile = open(file,"r")
     flagFileText = flagFile.read()
 
-    bracketDepth = 0
     isComment = True
+
+    endOfVarDef = 0
+
+    #skips var deines
+    for z in range (0,len(flagFileText)):
+        if (isComment):
+            #is start of new line (hence is not a comment for next char)
+            if flagFileText[z] == '\n':
+                isComment = False
+        elif flagFileText[z] == '#' or flagFileText[z] == '@':
+            isComment = True
+        if (isComment == False and flagFileText[z] != '\n' and flagFileText[z] != ' '):
+            endOfVarDef = z
+            break
+     
+
+    bracketDepth = 0
     isTag = False
     tag = ""
 
-    for i in range (0,len(flagFileText)):
+    for i in range (endOfVarDef,len(flagFileText)):
+        debugBuff = flagFileText[i:i+100]
+        debugChar = flagFileText[i]
         if (isComment):
             #is start of new line (hence is not a comment for next char)
             if flagFileText[i] == '\n':
                 isComment = False
-        # # is the comments and @ defines vars so we treat them the same here as they dont impact the parsing of data
-        elif flagFileText[i] == '#' or flagFileText[i] == '@':
+        # # is the comments it is skiped until new line
+        elif flagFileText[i] == '#':
             isComment = True
         elif flagFileText[i] == '{':
-            bracketDepth += 1
+            bracketDepth = bracketDepth + 1
         elif flagFileText[i] == '}':
-            bracketDepth -= 1
+            bracketDepth = bracketDepth - 1
         # this means the next input text is a countries tag
         elif bracketDepth == 0 and flagFileText[i] != ' ' and flagFileText[i] != '=' and flagFileText[i] != '\n':
             tag = tag + flagFileText[i]
