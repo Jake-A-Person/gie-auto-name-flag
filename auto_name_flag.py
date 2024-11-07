@@ -1,14 +1,27 @@
+#addes new name to localisation file (.yml)
 def addLoc(file,tag,name,adj):
     locFile = open(file,"a" )
     writeVal = "\n gov_exile_" + tag + ": \"" + name + "\"\n " + "gov_exile_" + tag + "_adj: \"" + adj + "\""
     print (writeVal)
     locFile.write(writeVal)
+    locFile.close
 
-# def addName(file,tag,name):
+#addes the new name to be associated with the GIE
+def addDynName(file,tag):
+    dynNameFile = open(file,"r")
+    writeVal = "\n\tdynamic_country_name = {" + "\n\t\tname = gov_exile_" + tag + "\n\t\tadjective = gov_exile_" + tag + "_adj" + "\n\t\tpriority = 1000" + "\n\t\ttrigger ={" + "\n\t\t\texists = scope:actor" + "\n\t\t\tscope:actor ?= {" + "\n\t\t\t\thas_variable = gov_exile_" + tag + "\n\t\t\t\thas_journal_entry = je_gie_africa_union" + "\n\t\t\t}" + "\n\t\t}" + "\n\t}\n"
+    print(writeVal)
+    dynNameFileText = dynNameFile.read()
+    finalClose = dynNameFileText.rindex("}")
+    dynNameFile.close
+    dynNameFile = open(file,"w")
+    writeVal = dynNameFileText[0:finalClose] + writeVal + dynNameFileText[finalClose:len(dynNameFileText)]
+    dynNameFile.write(writeVal)
+    print(writeVal)
+    dynNameFile.close
 
-
-def freeName(file,tag):
-    name = input("Enter the name for the GIE:")
+# def freeName(file,tag):
+#     name = input("Enter the name for the GIE:")
 
 
 
@@ -79,4 +92,5 @@ def readFlags(file,tagToFind):
                 tag = ""
                 isTag = False
 addLoc("testLoc.yml","PRU","Free Prussia","Free Prussian")
+addDynName("testDynName.txt","pru")
 #print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","GBR"))
