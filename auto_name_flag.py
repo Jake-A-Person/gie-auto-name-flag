@@ -1,8 +1,8 @@
 def addLoc(file,tag,name,adj):
-    #locFile = open(file,"a" )
-    writeVal = "gov_exile_" + tag + ": \"" + name + "\"\n" + "gov_exile_" + tag + "_adj: \"" + adj + "\""
+    locFile = open(file,"a" )
+    writeVal = "\n gov_exile_" + tag + ": \"" + name + "\"\n " + "gov_exile_" + tag + "_adj: \"" + adj + "\""
     print (writeVal)
-    #locFile.write
+    locFile.write(writeVal)
 
 # def addName(file,tag,name):
 
@@ -78,5 +78,5 @@ def readFlags(file,tagToFind):
             else:
                 tag = ""
                 isTag = False
-addLoc("PLACEHOLDER","PRU","Free Prussia","Free Prussian")
+addLoc("testLoc.yml","PRU","Free Prussia","Free Prussian")
 #print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","GBR"))
