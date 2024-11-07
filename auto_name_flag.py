@@ -1,3 +1,17 @@
+def addLoc(file,tag,name,adj):
+    #locFile = open(file,"a" )
+    writeVal = "gov_exile_" + tag + ": \"" + name + "\"\n" + "gov_exile_" + tag + "_adj: \"" + adj + "\""
+    print (writeVal)
+    #locFile.write
+
+# def addName(file,tag,name):
+
+
+def freeName(file,tag):
+    name = input("Enter the name for the GIE:")
+
+
+
 def readFlags(file,tagToFind):
     flagFile = open(file,"r")
     flagFileText = flagFile.read()
@@ -44,6 +58,7 @@ def readFlags(file,tagToFind):
         elif flagFileText[i] == '=' and isTag == True:
             #found
             if tag.strip() == tagToFind:
+
                 returnVal = ""
                 intial0 = True
                 for y in range (i,len(flagFileText)):
@@ -53,11 +68,9 @@ def readFlags(file,tagToFind):
                         isComment = True
                     elif flagFileText[y] == '{':
                         bracketDepth += 1
-                        returnVal = returnVal + flagFileText[y]
                         intial0 = False
                     elif flagFileText[y] == '}':
                         bracketDepth -= 1 
-                        returnVal = returnVal + flagFileText[y]
                     if bracketDepth == 0 and intial0 == False:
                         return returnVal
                     else:
@@ -65,5 +78,5 @@ def readFlags(file,tagToFind):
             else:
                 tag = ""
                 isTag = False
-
-print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","GBR"))
+addLoc("PLACEHOLDER","PRU","Free Prussia","Free Prussian")
+#print(readFlags("c:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/common/flag_definitions/00_flag_definitions.txt","GBR"))
